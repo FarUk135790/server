@@ -1,0 +1,110 @@
+<odoo>
+    <record id="book_the_hobbit" model="library.book">
+        <field name="name">The Hobbit</field>
+        <field name="author">J. R. R. Tolkien</field>
+        <field name="isbn">9780547928227</field>
+        <field name="publish_year">1937</field>
+    </record>
+    <record id="book_dune" model="library.book">
+        <field name="name">Dune</field>
+        <field name="author">Frank Herbert</field>
+        <field name="isbn">9780441172719</field>
+        <field name="publish_year">1965</field>
+    </record>
+    <record id="book_pride_and_prejudice" model="library.book">
+        <field name="name">Pride and Prejudice</field>
+        <field name="author">Jane Austen</field>
+        <field name="isbn">9780141439518</field>
+        <field name="publish_year">1813</field>
+    </record>
+    <record id="book_nineteen_eighty_four" model="library.book">
+        <field name="name">Nineteen Eighty-Four</field>
+        <field name="author">George Orwell</field>
+        <field name="isbn">9780451524935</field>
+        <field name="publish_year">1949</field>
+    </record>
+
+    <record id="copy_hobbit_001" model="library.copy">
+        <field name="book_id" ref="book_the_hobbit"/>
+        <field name="inventory_number">HOB-001</field>
+        <field name="condition">new</field>
+    </record>
+    <record id="copy_hobbit_002" model="library.copy">
+        <field name="book_id" ref="book_the_hobbit"/>
+        <field name="inventory_number">HOB-002</field>
+        <field name="condition">good</field>
+    </record>
+    <record id="copy_dune_001" model="library.copy">
+        <field name="book_id" ref="book_dune"/>
+        <field name="inventory_number">DUN-001</field>
+        <field name="condition">good</field>
+    </record>
+    <record id="copy_dune_002" model="library.copy">
+        <field name="book_id" ref="book_dune"/>
+        <field name="inventory_number">DUN-002</field>
+        <field name="condition">damaged</field>
+    </record>
+    <record id="copy_pride_001" model="library.copy">
+        <field name="book_id" ref="book_pride_and_prejudice"/>
+        <field name="inventory_number">PAP-001</field>
+        <field name="condition">good</field>
+    </record>
+    <record id="copy_pride_002" model="library.copy">
+        <field name="book_id" ref="book_pride_and_prejudice"/>
+        <field name="inventory_number">PAP-002</field>
+        <field name="condition">new</field>
+    </record>
+    <record id="copy_1984_001" model="library.copy">
+        <field name="book_id" ref="book_nineteen_eighty_four"/>
+        <field name="inventory_number">1984-001</field>
+        <field name="condition">new</field>
+    </record>
+    <record id="copy_1984_002" model="library.copy">
+        <field name="book_id" ref="book_nineteen_eighty_four"/>
+        <field name="inventory_number">1984-002</field>
+        <field name="condition">good</field>
+    </record>
+
+    <record id="member_oksana" model="library.member">
+        <field name="name">Oksana Shevchenko</field>
+        <field name="membership_number">LIB-0001</field>
+    </record>
+    <record id="member_taras" model="library.member">
+        <field name="name">Taras Kovalenko</field>
+        <field name="membership_number">LIB-0002</field>
+    </record>
+    <record id="member_iryna" model="library.member">
+        <field name="name">Iryna Bondar</field>
+        <field name="membership_number">LIB-0003</field>
+    </record>
+
+    <record id="loan_hobbit_oksana" model="library.loan">
+        <field name="copy_id" ref="copy_hobbit_001"/>
+        <field name="member_id" ref="member_oksana"/>
+        <field name="loan_date" eval="(DateTime.today() - relativedelta(days=3)).strftime('%Y-%m-%d')"/>
+        <field name="due_date" eval="(DateTime.today() + relativedelta(days=11)).strftime('%Y-%m-%d')"/>
+        <field name="state">active</field>
+    </record>
+    <record id="loan_dune_taras" model="library.loan">
+        <field name="copy_id" ref="copy_dune_001"/>
+        <field name="member_id" ref="member_taras"/>
+        <field name="loan_date" eval="(DateTime.today() - relativedelta(days=8)).strftime('%Y-%m-%d')"/>
+        <field name="due_date" eval="(DateTime.today() + relativedelta(days=6)).strftime('%Y-%m-%d')"/>
+        <field name="state">active</field>
+    </record>
+    <record id="loan_pride_iryna" model="library.loan">
+        <field name="copy_id" ref="copy_pride_001"/>
+        <field name="member_id" ref="member_iryna"/>
+        <field name="loan_date" eval="(DateTime.today() - relativedelta(days=25)).strftime('%Y-%m-%d')"/>
+        <field name="due_date" eval="(DateTime.today() - relativedelta(days=11)).strftime('%Y-%m-%d')"/>
+        <field name="return_date" eval="(DateTime.today() - relativedelta(days=13)).strftime('%Y-%m-%d')"/>
+        <field name="state">returned</field>
+    </record>
+    <record id="loan_1984_taras" model="library.loan">
+        <field name="copy_id" ref="copy_1984_001"/>
+        <field name="member_id" ref="member_taras"/>
+        <field name="loan_date" eval="(DateTime.today() - relativedelta(days=2)).strftime('%Y-%m-%d')"/>
+        <field name="due_date" eval="(DateTime.today() + relativedelta(days=12)).strftime('%Y-%m-%d')"/>
+        <field name="state">active</field>
+    </record>
+</odoo>

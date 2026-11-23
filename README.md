@@ -31,6 +31,30 @@ To learn the software, we recommend the [Odoo eLearning](https://www.odoo.com/sl
 or [Scale-up, the business game](https://www.odoo.com/page/scale-up-business-game).
 Developers can start with [the developer tutorials](https://www.odoo.com/documentation/master/developer/howtos.html).
 
+## Library Rental module
+
+This repository includes the custom `library_rental` addon in `custom_addons/library_rental`.
+It provides models and menus for books, physical copies, members, and loans. Membership numbers
+are unique, and books or members with loan history, as well as books with copies, cannot be deleted
+until their linked records are removed.
+
+Install the addon into an existing database from the repository root:
+
+```shell
+python odoo-bin -c odoo.conf -d YOUR_DATABASE -i library_rental
+```
+
+For an already installed addon, use `-u library_rental` instead of `-i` to apply updates.
+Demo data (4 books, 8 copies, 3 members, and 4 loans) is loaded when demo data is enabled.
+
+To open an Odoo shell for the database:
+
+```shell
+python odoo-bin shell -c odoo.conf -d YOUR_DATABASE
+```
+
+For example, list the demo books with `env['library.book'].search([]).mapped('name')`.
+
 ## Security
 
 If you believe you have found a security issue, check our [Responsible Disclosure page](https://www.odoo.com/security-report)
